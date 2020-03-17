@@ -3,7 +3,12 @@ package co.kr.tjoeun.helloworld.a20200317_04_anroidfunction02;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+
+import java.net.URI;
 
 import co.kr.tjoeun.helloworld.a20200317_04_anroidfunction02.databinding.ActivityMainBinding;
 
@@ -15,5 +20,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        binding.dialBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                다른 화면으로 이동한다 : Intent
+//                 => 우리가 만든 게 아닌 안드로이드가 제공하는 화면으로
+//                 => 전화걸기 화면
+
+//                어느 화면으로 갈지 => 안드로이드가 요구하는 양식으로 작성 Uri
+                String num = binding.phoneNum.getText().toString();
+                String phoneUriStr = String.format("tel:%s",num);
+
+                Uri uri = Uri.parse(phoneUriStr);
+                Intent intent = new Intent(Intent.ACTION_DIAL,uri);
+                startActivity(intent);
+
+
+
+            }
+        });
     }
 }
