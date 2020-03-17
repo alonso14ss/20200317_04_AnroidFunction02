@@ -30,14 +30,27 @@ public class MainActivity extends AppCompatActivity {
 
 //                어느 화면으로 갈지 => 안드로이드가 요구하는 양식으로 작성 Uri
                 String num = binding.phoneNum.getText().toString();
-                String phoneUriStr = String.format("tel:%s",num);
+                String phoneUriStr = String.format("tel:%s", num);
 
                 Uri uri = Uri.parse(phoneUriStr);
-                Intent intent = new Intent(Intent.ACTION_DIAL,uri);
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
                 startActivity(intent);
 
 
+            }
+        });
 
+        binding.callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                현재까지 배운걸로만 실행 불가 : 권한 획득 x
+                String num = binding.phoneNum.getText().toString();
+                String phoneUriStr = String.format("tel:%s", num);
+
+                Uri uri = Uri.parse(phoneUriStr);
+                Intent intent = new Intent(Intent.ACTION_CALL, uri);
+                startActivity(intent);
             }
         });
     }
